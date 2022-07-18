@@ -1,10 +1,19 @@
+/** @format */
+
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
+import {
+  AtomicContainer,
+  CustomizableContainer,
+  DEFAULT_DATA,
+  Field,
+} from "./components/Container";
 
 export const PLASMIC = initPlasmicLoader({
   projects: [
     {
       id: "48urnctFmaYjeHBp3o9yY1",
-      token: "JYhhxVfCOcX2e1oSAeDOMMJJuIcWeV59RCRFQwew77lt3qnhL4YMGvaO67cBTr84mAwH81d3162gnybtxdw",
+      token:
+        "JYhhxVfCOcX2e1oSAeDOMMJJuIcWeV59RCRFQwew77lt3qnhL4YMGvaO67cBTr84mAwH81d3162gnybtxdw",
     },
   ],
 
@@ -22,4 +31,45 @@ export const PLASMIC = initPlasmicLoader({
 // http://localhost:3000/plasmic-host).  See
 // https://docs.plasmic.app/learn/app-hosting/#set-a-plasmic-project-to-use-your-app-host
 
-// PLASMIC.registerComponent(...);
+PLASMIC.registerComponent(AtomicContainer, {
+  name: "AtomicContainer",
+  props: {
+    defaultData: {
+      type: "object",
+      defaultValue: DEFAULT_DATA,
+    },
+  },
+});
+
+PLASMIC.registerComponent(CustomizableContainer, {
+  name: "CustomizableContainer",
+  providesData: true,
+  props: {
+    defaultData: {
+      type: "object",
+      defaultValue: DEFAULT_DATA,
+    },
+    children: {
+      type: "slot",
+      defaultValue: {
+        type: "vbox",
+        children: [
+          {
+            type: "component",
+            name: "Field",
+          },
+        ],
+      },
+    },
+  },
+});
+
+PLASMIC.registerComponent(Field, {
+  name: "Field",
+  props: {
+    field: {
+      type: "string",
+      defaultValue: "text",
+    },
+  },
+});
