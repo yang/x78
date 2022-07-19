@@ -8,6 +8,8 @@ import {
 import update from "immutability-helper";
 import { FC, ReactNode, useContext } from "react";
 import { useCallback, useState } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 import { Card } from "./Card";
 
@@ -177,4 +179,19 @@ export function Field({
 }) {
   const data = useSelector("card");
   return <div className={className}>{data[field ?? "id"]}</div>;
+}
+
+export function HelloWorld() {
+  return <div>Hello World</div>;
+}
+
+export function CustomControls() {
+  return (
+    <div>
+      <input type="text" onBlur={() => console.log("foo")} />
+      <DndProvider backend={HTML5Backend}>
+        <AtomicContainer defaultData={DEFAULT_DATA} />
+      </DndProvider>
+    </div>
+  );
 }

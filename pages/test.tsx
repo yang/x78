@@ -9,15 +9,19 @@ import {
   DEFAULT_DATA,
   Field,
 } from "../components/Container";
+import { Rbd } from "../components/Rbd";
 
 export default function Page() {
   return (
-    <div>
+    <DndProvider backend={HTML5Backend}>
+      <h2>React Beautiful DND</h2>
+      <Rbd />
+      <h2>React DND</h2>
       <AtomicContainer defaultData={DEFAULT_DATA} />
       <CustomizableContainer defaultData={DEFAULT_DATA}>
         <Field field={"text"} />
         <Field field={"text"} />
       </CustomizableContainer>
-    </div>
+    </DndProvider>
   );
 }

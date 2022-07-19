@@ -49,6 +49,7 @@ export const Card: FC<CardProps> = ({
       };
     },
     hover(item: DragItem, monitor) {
+      console.log("hover");
       if (!ref.current) {
         return;
       }
@@ -103,16 +104,19 @@ export const Card: FC<CardProps> = ({
     item: () => {
       return { id, index };
     },
-    collect: (monitor: any) => ({
-      isDragging: monitor.isDragging(),
-    }),
+    collect: (monitor: any) => {
+      console.log(monitor, monitor.isDragging());
+      return {
+        isDragging: monitor.isDragging(),
+      };
+    },
   });
 
-  const opacity = isDragging ? 0 : 1;
+  const opacity = isDragging ? 1 : 1;
   drag(drop(ref));
   return (
     <div ref={ref} style={{ ...style, opacity }} data-handler-id={handlerId}>
-      {children}
+      {index} {children}
     </div>
   );
 };

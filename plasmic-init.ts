@@ -3,10 +3,13 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
 import {
   AtomicContainer,
+  CustomControls,
   CustomizableContainer,
   DEFAULT_DATA,
   Field,
+  HelloWorld,
 } from "./components/Container";
+import { Rbd } from "./components/Rbd";
 
 export const PLASMIC = initPlasmicLoader({
   projects: [
@@ -31,45 +34,18 @@ export const PLASMIC = initPlasmicLoader({
 // http://localhost:3000/plasmic-host).  See
 // https://docs.plasmic.app/learn/app-hosting/#set-a-plasmic-project-to-use-your-app-host
 
-PLASMIC.registerComponent(AtomicContainer, {
-  name: "AtomicContainer",
-  props: {
-    defaultData: {
-      type: "object",
-      defaultValue: DEFAULT_DATA,
-    },
-  },
-});
-
-PLASMIC.registerComponent(CustomizableContainer, {
-  name: "CustomizableContainer",
-  providesData: true,
-  props: {
-    defaultData: {
-      type: "object",
-      defaultValue: DEFAULT_DATA,
-    },
-    children: {
-      type: "slot",
-      defaultValue: {
-        type: "vbox",
-        children: [
-          {
-            type: "component",
-            name: "Field",
-          },
-        ],
-      },
-    },
-  },
-});
-
-PLASMIC.registerComponent(Field, {
-  name: "Field",
+PLASMIC.registerComponent(HelloWorld, {
+  name: "HelloWorld",
   props: {
     field: {
-      type: "string",
-      defaultValue: "text",
+      type: "custom",
+      control: Rbd,
     },
   },
+  actions: [
+    {
+      type: "custom-action",
+      control: Rbd,
+    },
+  ],
 });
