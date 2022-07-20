@@ -39,13 +39,13 @@ PLASMIC.registerComponent(HelloWorld, {
   props: {
     field: {
       type: "custom",
-      control: Rbd,
+      control: CustomControls,
     },
   },
   actions: [
     {
       type: "custom-action",
-      control: Rbd,
+      control: CustomControls,
     },
   ],
 });

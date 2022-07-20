@@ -189,7 +189,10 @@ export function CustomControls() {
   return (
     <div>
       <input type="text" onBlur={() => console.log("foo")} />
-      <DndProvider backend={HTML5Backend}>
+      <DndProvider
+        backend={HTML5Backend}
+        options={{ document: window.parent.document }}
+      >
         <AtomicContainer defaultData={DEFAULT_DATA} />
       </DndProvider>
     </div>
